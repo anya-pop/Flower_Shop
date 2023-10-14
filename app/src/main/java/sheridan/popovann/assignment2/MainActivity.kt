@@ -38,3 +38,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@Preview
+@Composable
+fun Preview() {
+    AppTheme(darkTheme = false) {
+        AppScreen()
+    }
+}
+
+@Preview
+@Composable
+fun DarkThemePreview() {
+    AppTheme(darkTheme = true) {
+        AppScreen()
+    }
+}

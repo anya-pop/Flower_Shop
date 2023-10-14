@@ -6,14 +6,18 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.text.intl.Locale
@@ -49,19 +53,25 @@ fun FlowerItem(flower: Flower) {
         modifier = Modifier
             .padding(dimensionResource(id = R.dimen.padding_small))
             .fillMaxWidth()
+
     ){
         Row (
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
         ){
             AsyncImage(
                 model = "file:///android_asset/images/flowers/${flower.image}",
-                contentDescription = "${flower.label}"
+                contentDescription = "${flower.label}",
+                modifier = Modifier
+                    .clip(MaterialTheme.shapes.small)
+                    .size(dimensionResource(R.dimen.image_size)),
+                contentScale = ContentScale.Crop
+
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.Start,
                 modifier = Modifier.fillMaxWidth()
             ){
                 Row(
@@ -69,13 +79,15 @@ fun FlowerItem(flower: Flower) {
                 ){
                     Text(
                         text = flower.label.capitalize(Locale.current),
-                        fontSize = 28.sp
+                        fontSize = 28.sp,
+                        style = MaterialTheme.typography.displayMedium
                     )
 
                 }
                 Text(
                     text = String.format("%.2f", flower.price),
-                    fontSize = 24.sp
+                    fontSize = 24.sp,
+                    style = MaterialTheme.typography.bodyLarge
                 )
             }
         }

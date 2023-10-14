@@ -25,7 +25,9 @@ fun TopAppBar(
     navigateUp: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
-        title = { Text(title) },
+        title = {
+            Text(title,
+            style = MaterialTheme.typography.displayLarge) },
         modifier = modifier,
         scrollBehavior = scrollBehavior,
         navigationIcon = {
