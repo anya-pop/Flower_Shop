@@ -11,4 +11,8 @@
     <string name="loading_data">Loading Data</string>
     <string name="fake_delay">Fake delay, 2s</string>
     <string name="retry_button_label">Retry</string>
+    <string name="expand_button_content_description">See more information.</string>
+    <string name="about">About:</string>
+
+
 </resources>

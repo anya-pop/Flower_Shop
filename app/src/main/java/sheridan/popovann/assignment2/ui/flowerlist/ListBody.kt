@@ -4,22 +4,33 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,6 +38,7 @@ import sheridan.popovann.assignment2.domain.Flower
 import coil.compose.AsyncImage
 import androidx.compose.ui.text.capitalize
 import sheridan.popovann.assignment2.R
+import sheridan.popovann.assignment2.ui.flowerlist.FlowerDescription
 
 
 @Composable
@@ -48,6 +60,8 @@ fun ListBody(
 
 @Composable
 fun FlowerItem(flower: Flower) {
+    var expanded by remember { mutableStateOf(false) }
+
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
@@ -82,7 +96,24 @@ fun FlowerItem(flower: Flower) {
                         fontSize = 28.sp,
                         style = MaterialTheme.typography.displayMedium
                     )
+                    Spacer(Modifier.weight(1f))
+                    FlowerItemButton(
+                        expanded = expanded,
+                        onClick = { expanded = !expanded },
+                    )
 
+
+                }
+                if (expanded) {
+                    FlowerDescription(
+                        flower,
+                        modifier = Modifier.padding(
+                            start = dimensionResource(R.dimen.padding_medium),
+                            top = dimensionResource(R.dimen.padding_small),
+                            bottom = dimensionResource(R.dimen.padding_medium),
+                            end = dimensionResource(R.dimen.padding_medium)
+                        )
+                    )
                 }
                 Text(
                     text = String.format("%.2f", flower.price),
