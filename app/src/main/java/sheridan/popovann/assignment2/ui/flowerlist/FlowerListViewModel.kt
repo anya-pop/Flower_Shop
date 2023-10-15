@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import sheridan.popovann.assignment2.data.local.flowerList
 import sheridan.popovann.assignment2.data.repository.FlowerDataRepository
 import java.io.IOException
 import javax.inject.Inject
@@ -17,8 +16,9 @@ import javax.inject.Inject
 class FlowerListViewModel @Inject constructor(
     private val repository: FlowerDataRepository
 ) : ViewModel() {
+
     private val _uiState: MutableState<FlowerListUiState> =
-        mutableStateOf(FlowerListUiState.Loaded(flowerList))
+        mutableStateOf(FlowerListUiState.Loading)
     val uiState: State<FlowerListUiState> = _uiState
 
     init {
@@ -29,8 +29,8 @@ class FlowerListViewModel @Inject constructor(
         //fake loading delay, 2 seconds
         delay(2000)
         try {
-            val pets = repository.getAllFlowers()
-            _uiState.value = FlowerListUiState.Loaded(pets)
+            val flowers = repository.getAllFlowers()
+            _uiState.value = FlowerListUiState.Loaded(flowers)
         } catch (e: IOException) {
             _uiState.value = FlowerListUiState.Error
             e.printStackTrace()
