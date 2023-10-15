@@ -21,7 +21,9 @@ import sheridan.popovann.assignment2.data.local.flowerList
 import sheridan.popovann.assignment2.domain.Flower
 import sheridan.popovann.assignment2.ui.AppScreen
 import sheridan.popovann.assignment2.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
