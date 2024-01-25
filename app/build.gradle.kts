@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "sheridan.popovann.assignment2"
+    namespace = "sheridan.popovann.flowershop"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "sheridan.popovann.assignment2"
+        applicationId = "sheridan.popovann.flowershop"
         minSdk = 31
         targetSdk = 33
         versionCode = 1
